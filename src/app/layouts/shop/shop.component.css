@@ -1,0 +1,12 @@
+.shop .card-heading a::after {
+  content: "";
+}
+
+.shop .card-heading a {
+  transition: 0.3s all;
+}
+
+.categories__accordion .card:hover .card-heading a {
+  color: #ca1515;
+  transition: 0.3s all;
+}
