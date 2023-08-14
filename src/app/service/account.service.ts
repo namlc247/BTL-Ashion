@@ -15,6 +15,10 @@ export class AccountService implements OnInit {
   }
 
   checkLogin(data: any) {
-    this.http.post(`${api}/account`, data);
+    return this.http.post(`${api}/login`, data);
+  }
+
+  registerAccount(data: any) {
+    return this.http.post(`${api}/register`, data);
   }
 }

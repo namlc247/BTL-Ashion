@@ -25,9 +25,11 @@
             </div>
             <div class="categories__accordion">
               <div class="accordion" id="accordionExample">
-                <div class="card">
+                <div class="card" *ngFor="let cat of categories">
                   <div class="card-heading">
-                    <a>Women</a>
+                    <a style="font-size: 16px; padding: 5px 0px;" (click)="filterPrdByCat(cat.id)">
+                      {{cat.name}}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -38,18 +40,78 @@
       <div class="col-lg-9 col-md-9">
         <div class="row">
 
+          <div class="col-12">
+            <div class="product-list-top text-center d-flex justify-content-between">
+              <div class="search-box">
+
+                <form class="form-inline" [formGroup]="searchForm" (submit)="showProductSearch()">
+
+                  <div class="form-group">
+                    <input type="email" class="form-control" formControlName="name" placeholder="Product Name">
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                </form>
+
+              </div>
+
+              <div class="total-box">
+                <span>There are {{products.length}} products</span>
+              </div>
+
+              <div class="sort-box">
+                <div class="reload" style="display: grid; align-items: center;">
+                  <a style="cursor: pointer; padding: 5px; margin-right: 20px; font-size: 18px;" (click)="reloadShop()">
+                    <i class="fa-solid fa-rotate"></i>
+                  </a>
+                </div>
+
+                <div class="dropdown">
+                  <button class="btn my-sort-btn dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{sortType}}
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a (click)="sortProduct('final_price','ASC', 'Price, low to high')" class="dropdown-item">
+                      Price, low to high
+                    </a>
+                    <a (click)="sortProduct('final_price','DESC', 'Price, high to low')" class="dropdown-item">
+                      Price, high to low
+                    </a>
+                    <a (click)="sortProduct('name','ASC', 'Price, high to low')" class="dropdown-item">
+                      Name, A to Z
+                    </a>
+                    <a (click)="sortProduct('name','DESC', 'Price, high to low')" class="dropdown-item">
+                      Name, Z to A
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="col-lg-4 col-md-6" *ngFor="let prd of products">
-            <div class="product__item sale">
+            <div class="product__item" [class]="prd.sale_price > 0 ? 'sale' : ''">
               <div class="product__item__pic set-bg" [style.background-image]="'url('+prd.image+')'">
-                <!-- <div class="label">Sale</div> -->
+                <div class="label" *ngIf="prd.sale_price > 0">Sale</div>
                 <ul class="product__hover">
-                  <li><a href="img/shop/shop-5.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                  <li>
+                    <a [routerLink]="['/product-detail', prd.id]" class="image-popup">
+                      <span class="arrow_expand"></span>
+                    </a>
+                  </li>
                   <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                   <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                 </ul>
               </div>
               <div class="product__item__text">
-                <h6><a href="#">{{prd.name}}</a></h6>
+                <h6>
+                  <a style="font-size: 16px;" [routerLink]="['/product-detail', prd.id]">
+                    {{prd.name}}
+                  </a>
+                </h6>
                 <div class="rating">
                   <i class="fa fa-star"></i>
                   <i class="fa fa-star"></i>
@@ -57,7 +119,9 @@
                   <i class="fa fa-star"></i>
                   <i class="fa fa-star"></i>
                 </div>
-                <div class="product__price">$ {{prd.price}}</div>
+                <div class="product__price">
+                  $ {{prd.price - prd.sale_price}} <span *ngIf="prd.sale_price > 0">$ {{prd.price}}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -65,6 +129,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </section>
 <!-- Shop Section End -->

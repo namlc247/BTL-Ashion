@@ -8,10 +8,20 @@ const api = 'http://localhost:3000/api';
 })
 
 export class ProductService {
-
   constructor(private http: HttpClient) { }
 
-  getProduct() {
-    return this.http.get(`${api}/product`);
+  getProduct(data: any = {}) {
+    let url: any = '';
+
+    url += data.category_id ? `cat_id=${data.category_id}&` : '';
+    url += data.search ? `search=${data.search}&` : '';
+    url += data.limit ? `limit=${data.limit}&` : '';
+    url += data.sort ? `sort=${data.sort}&order=${data.order}&` : '';
+
+    return this.http.get(`${api}/product?${url}`);
+  }
+
+  getProductById(id: number) {
+    return this.http.get(`${api}/product/${id}`);
   }
 }

@@ -1,0 +1,47 @@
+.login-form input,
+.login-form .site-btn,
+a.register-link {
+  transition: 0.3s all;
+}
+
+.login-form input {
+  border: 1px solid #ccc;
+  margin-bottom: 0px;
+}
+
+.login-form input:focus {
+  border: 1px solid #ca1515;
+  transition: 0.3s all;
+}
+
+.login-form .btn-active {
+  border: 2px solid #ca1515;
+}
+
+.login-form .btn-disable {
+  background-color: #d48282;
+  border: 2px solid #d48282;
+}
+
+.login-form .btn-active:hover {
+  background-color: #fff;
+  color: #ca1515;
+}
+
+a.register-link {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a.register-link:hover {
+  color: #ca1515;
+}
+
+.error-area small {
+  color: red;
+  font-style: italic;
+  padding-left: 20px;
+  padding-top: 5px;
+}

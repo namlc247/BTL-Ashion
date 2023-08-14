@@ -10,3 +10,107 @@
   color: #ca1515;
   transition: 0.3s all;
 }
+
+.categories__accordion .card {
+  border-bottom: 1px solid #ddd !important;
+}
+
+.categories__accordion .card:last-child {
+  border-bottom: none !important;
+}
+
+.product-list-top {
+  border: 1px solid #ebebeb;
+  width: 100%;
+  padding: 7px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.total-box {
+  display: grid;
+  align-items: center;
+}
+
+.sort-box {
+  display: flex;
+}
+
+.sort-menu {
+  border: 1px solid #ebebeb;
+}
+
+.sort-menu:focus {
+  outline: none;
+}
+
+.sort-box .btn {
+  background-color: transparent;
+  border: 1px solid #ebebeb;
+}
+
+.sort-box .btn:focus {
+  box-shadow: none;
+}
+
+.sort-box .dropdown-menu {
+  padding: 0px;
+}
+
+.sort-box .dropdown-item {
+  background: white;
+  transition: 0.3s all;
+  border-bottom: 1px solid #ebebeb;
+  padding: 10px 20px;
+}
+
+.sort-box .dropdown-item:hover {
+  cursor: pointer;
+  color: #fff;
+  background: #ca1515;
+  transition: 0.3s all;
+}
+
+.search-box input:focus {
+  box-shadow: none;
+  border: 1px solid #ca1515;
+}
+
+.search-box input {
+  border-radius: 0%;
+}
+
+.search-box .btn {
+  background-color: #444;
+  transition: 0.3s all;
+  border: none;
+  border-radius: 0%;
+  border: 1.5px solid #333;
+}
+
+.search-box .btn:hover {
+  background-color: #ca1515;
+  transition: 0.3s all;
+  border: 1.5px solid #ca1515;
+}
+
+.search-box .btn:focus {
+  box-shadow: none;
+}
+
+.my-sort-btn {
+  color: #333;
+}
+
+.my-sort-btn:hover {
+  color: #333;
+}
+
+.reload a {
+  transition: 0.3s all;
+}
+
+.reload a:hover {
+  color: #ca1515;
+  transition: 0.3s all;
+}
