@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { CartComponent } from './layouts/cart/cart.component';
 import { CheckoutComponent } from './layouts/checkout/checkout.component';
 import { ProductDetailComponent } from './layouts/product-detail/product-detail.component';
 import { ContactComponent } from './layouts/contact/contact.component';
+import { LoginComponent } from './layouts/login/login.component';
+import { RegisterComponent } from './layouts/register/register.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +28,14 @@ import { ContactComponent } from './layouts/contact/contact.component';
     CartComponent,
     CheckoutComponent,
     ProductDetailComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [],
