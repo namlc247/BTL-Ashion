@@ -8,12 +8,14 @@ import { ProductDetailComponent } from './layouts/product-detail/product-detail.
 import { ContactComponent } from './layouts/contact/contact.component';
 import { LoginComponent } from './layouts/login/login.component';
 import { RegisterComponent } from './layouts/register/register.component';
+import { FavouriteComponent } from './layouts/favourite/favourite.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'favourite', component: FavouriteComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'product-detail/:id', component: ProductDetailComponent },
   { path: 'login', component: LoginComponent },
