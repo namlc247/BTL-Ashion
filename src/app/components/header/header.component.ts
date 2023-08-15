@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccountService } from 'src/app/service/account.service';
 
 declare var $: any;
 
@@ -9,18 +10,18 @@ declare var $: any;
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  check: boolean = false;
+  checkLogin: boolean = false;
   account: any = {};
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private accServive: AccountService
+  ) { }
 
 
   ngOnInit(): void {
-    let jsonData = sessionStorage.getItem('login');
-    if (jsonData) {
-      this.check = true;
-      this.account = JSON.parse(jsonData);
-    }
+    this.account = this.accServive.getAccountInStorage();
+    this.checkLogin = this.account ? true : false;
 
     $(".canvas__open").on('click', function () {
       $(".offcanvas-menu-wrapper").addClass("active");
@@ -39,8 +40,18 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
-    this.check = false;
+    this.checkLogin = false;
     sessionStorage.removeItem('login');
-    alert('You are Logged out');
+    alert('Logged out');
+    location.assign('/');
+  }
+
+  goToFavourite() {
+    if (!this.checkLogin) {
+      alert('You are not logged into your account');
+      return;
+    } else {
+      this.router.navigate(['/favourite', this.account.name]);
+    }
   }
 }

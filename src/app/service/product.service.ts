@@ -17,6 +17,7 @@ export class ProductService {
     url += data.search ? `search=${data.search}&` : '';
     url += data.limit ? `limit=${data.limit}&` : '';
     url += data.sort ? `sort=${data.sort}&order=${data.order}&` : '';
+    // url += data.account_id ? `account_id=${data.account_id}&` : '';
 
     return this.http.get(`${api}/product?${url}`);
   }

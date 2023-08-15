@@ -114,3 +114,14 @@
   color: #ca1515;
   transition: 0.3s all;
 }
+
+.filter-range-wrap .range-slider .price-input:after {
+  left: 100px;
+  width: 8px;
+}
+
+.fliter-price-btn:hover {
+  background-color: #ca1515;
+  color: #fff !important;
+  transition: 0.3s all;
+}

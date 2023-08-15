@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'shop', component: ShopComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'favourite', component: FavouriteComponent },
+  { path: 'favourite/:user_name', component: FavouriteComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'product-detail/:id', component: ProductDetailComponent },
   { path: 'login', component: LoginComponent },

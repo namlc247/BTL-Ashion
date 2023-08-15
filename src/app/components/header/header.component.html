@@ -56,12 +56,12 @@
       </div>
       <div class="col-lg-4">
         <div class="header__right">
-          <div *ngIf="!check" class="header__right__auth">
-            <a style="font-size: 16px; font-weight: 500; color: 111;" routerLink="/login">
+          <div *ngIf="!checkLogin" class="header__right__auth">
+            <a style="font-size: 16px; color: #111;" routerLink="/login">
               Login
             </a>
           </div>
-          <div *ngIf="check" class="header__right__auth">
+          <div *ngIf="checkLogin" class="header__right__auth">
             <span style="font-size: 16px;">Hello, {{account.name}} </span>
             <a style="font-size: 16px; color: #ca1515; cursor: pointer;" (click)="logOut()">
               / Log out
@@ -69,11 +69,11 @@
           </div>
           <ul class="header__right__widget">
             <!-- <li><span class="icon_search search-switch"></span></li> -->
-            <li><a routerLink="/favourite"><span class="icon_heart_alt"></span>
-                <div class="tip" style="background-color: #ca1515;">2</div>
+            <li><a (click)="goToFavourite()"><span class="icon_heart_alt"></span>
+                <!-- <div class="tip" style="background-color: #ca1515;">2</div> -->
               </a></li>
             <li><a routerLink="/cart"><span class="icon_bag_alt"></span>
-                <div class="tip" style="background-color: #ca1515;">2</div>
+                <!-- <div class="tip" style="background-color: #ca1515;">2</div> -->
               </a></li>
           </ul>
         </div>
@@ -85,5 +85,7 @@
   </div>
 </header>
 <!-- Header Section End -->
+
+<div style="margin-top: 100px;"></div>
 
 <app-search></app-search>

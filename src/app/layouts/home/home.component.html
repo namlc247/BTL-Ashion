@@ -77,11 +77,13 @@
           <li data-filter=".cosmetic">Cosmetics</li>
         </ul>
       </div> -->
+
+      <!-- col-lg-3 col-md-4 col-sm-6 -->
     </div>
     <div class="row property__gallery">
       <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let prd of products">
         <div class="product__item" [class]="prd.sale_price > 0 ? 'sale' : ''">
-          <div class="product__item__pic set-bg" [style.background-image]="'url('+prd.image+')'">
+          <div class="product__item__pic set-bg" [style.background-image]="'url(' + prd.image + ')'">
             <div class="label" *ngIf="prd.sale_price > 0">Sale</div>
             <ul class="product__hover">
               <li>
@@ -89,14 +91,26 @@
                   <span class="arrow_expand"></span>
                 </a>
               </li>
-              <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-              <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+              <li>
+                <a *ngIf="!prd.checkFavourite" style="cursor: pointer" (click)="addFavourite(prd.id)">
+                  <span class="icon_heart_alt"></span>
+                </a>
+
+                <a *ngIf="prd.checkFavourite" style="cursor: pointer" (click)="removeFavourite(prd.id)">
+                  <span class="" style="top: -2px; font-size: 18px; font-weight: 500">x</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="icon_bag_alt"></span>
+                </a>
+              </li>
             </ul>
           </div>
           <div class="product__item__text">
             <h6>
-              <a style="font-size: 16px;" [routerLink]="['/product-detail', prd.id]">
-                {{prd.name}}
+              <a style="font-size: 16px" [routerLink]="['/product-detail', prd.id]">
+                {{ prd.name }}
               </a>
             </h6>
             <div class="rating">
@@ -107,7 +121,8 @@
               <i class="fa fa-star"></i>
             </div>
             <div class="product__price">
-              $ {{prd.price - prd.sale_price}} <span *ngIf="prd.sale_price > 0">$ {{prd.price}}</span>
+              $ {{ prd.price - prd.sale_price }}
+              <span *ngIf="prd.sale_price > 0">$ {{ prd.price }}</span>
             </div>
           </div>
         </div>
