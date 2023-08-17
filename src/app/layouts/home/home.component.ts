@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
 
   addFavourite(prd_id: any) {
     if (!this.checkLogin) {
-      alert('You are not logged into your account');
+      this.notificationSrv.showWarning('', 'You have to Log In!');
       return;
     } else {
       let data = {

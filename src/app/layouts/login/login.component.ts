@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/service/account.service';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private notificationSrv: NotificationService
   ) { }
 
   get f() { return this.loginF.controls }
@@ -30,15 +32,13 @@ export class LoginComponent implements OnInit {
 
     this.accountService.checkLogin(this.loginF.value).subscribe((res: any) => {
       if (res.status == 200) {
-        alert('Logged in successfully');
-
 
         let jsonData = JSON.stringify(res.result);
         sessionStorage.setItem('login', jsonData);
 
         location.assign('/')
       } else {
-        alert('Email or password is incorrect');
+        this.notificationSrv.showError('Email or Password incorrect', 'Error!')
       }
     })
   }

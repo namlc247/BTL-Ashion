@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/service/account.service';
+import { NotificationService } from 'src/app/service/notification.service';
 
 declare var $: any;
 
@@ -15,7 +16,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private accServive: AccountService
+    private accServive: AccountService,
+    private notificationSrv: NotificationService
   ) { }
 
 
@@ -42,13 +44,12 @@ export class HeaderComponent implements OnInit {
   logOut() {
     this.checkLogin = false;
     sessionStorage.removeItem('login');
-    alert('Logged out');
-    location.assign('/');
+    this.notificationSrv.showWarning('', 'Logged out!');
   }
 
   goToFavourite() {
     if (!this.checkLogin) {
-      alert('You are not logged into your account');
+      this.notificationSrv.showWarning('', 'You have to Log In!');
       return;
     } else {
       this.router.navigate(['/favourite', this.account.name]);
