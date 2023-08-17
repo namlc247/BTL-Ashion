@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/service/account.service';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private notificationSrv: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -31,10 +33,10 @@ export class RegisterComponent implements OnInit {
 
     this.accountService.registerAccount(this.registerF.value).subscribe((res: any) => {
       if (res.status == 200) {
-        alert('Sign Up Success');
+        this.notificationSrv.showSuccess('', 'Register Success!');
         this.router.navigate(['/login']);
       } else {
-        alert('Email already exists');
+        this.notificationSrv.showError('Email already exists', 'Error!');
       }
     })
   }

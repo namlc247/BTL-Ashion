@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
         location.assign('/')
       } else {
-        this.notificationSrv.showError('Email or Password incorrect', 'Error!')
+        this.notificationSrv.showError('Email or Password incorrect', 'Error!');
       }
     })
   }
