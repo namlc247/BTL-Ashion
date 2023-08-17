@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AccountService } from 'src/app/service/account.service';
 import { CategoryService } from 'src/app/service/category.service';
 import { FavouriteService } from 'src/app/service/favourite.service';
+import { NotificationService } from 'src/app/service/notification.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -28,7 +29,8 @@ export class ShopComponent implements OnInit {
     private prdService: ProductService,
     private catService: CategoryService,
     private accServive: AccountService,
-    private favouriteService: FavouriteService
+    private favouriteService: FavouriteService,
+    private notificationSrv: NotificationService
   ) { }
 
   getProductData(data: any = {}) {
@@ -106,6 +108,8 @@ export class ShopComponent implements OnInit {
       this.favouriteService.addFavourite(data).subscribe((res: any) => {
         this.getProductData(this.urlData);
       });
+
+      this.notificationSrv.showSuccess('Add to Favourite', 'Success!');
     }
   }
 
@@ -118,5 +122,7 @@ export class ShopComponent implements OnInit {
     this.favouriteService.removeFavourite(data).subscribe((res: any) => {
       this.getProductData(this.urlData);
     });
+
+    this.notificationSrv.showError('', 'Removed!');
   }
 }

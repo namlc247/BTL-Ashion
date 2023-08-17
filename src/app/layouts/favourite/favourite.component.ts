@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/service/account.service';
 import { FavouriteService } from 'src/app/service/favourite.service';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   selector: 'app-favourite',
@@ -14,6 +15,7 @@ export class FavouriteComponent implements OnInit {
   constructor(
     private favouriteService: FavouriteService,
     private accServive: AccountService,
+    private notificationSrv: NotificationService,
   ) { }
 
   getFavouriteData(acc_id: any) {
@@ -39,5 +41,7 @@ export class FavouriteComponent implements OnInit {
     this.favouriteService.removeFavourite(data).subscribe((res: any) => {
       this.getFavouriteData(this.account.id);
     });
+
+    this.notificationSrv.showError('', 'Removed!');
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/service/account.service';
 import { FavouriteService } from 'src/app/service/favourite.service';
+import { NotificationService } from 'src/app/service/notification.service';
 import { ProductService } from 'src/app/service/product.service';
 
 declare var $: any;
@@ -20,7 +21,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private prdService: ProductService,
     private favouriteService: FavouriteService,
-    private accServive: AccountService
+    private accServive: AccountService,
+    private notificationSrv: NotificationService
   ) { }
 
   getProductData(data: any = {}) {
@@ -73,6 +75,8 @@ export class HomeComponent implements OnInit {
 
       this.favouriteService.addFavourite(data).subscribe();
       this.getProductData(this.urlData);
+
+      this.notificationSrv.showSuccess('Add to Favourite', 'Success!');
     }
   }
 
@@ -84,5 +88,7 @@ export class HomeComponent implements OnInit {
 
     this.favouriteService.removeFavourite(data).subscribe();
     this.getProductData(this.urlData);
+
+    this.notificationSrv.showError('', 'Removed!');
   }
 }

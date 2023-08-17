@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -17,6 +18,7 @@ import { ContactComponent } from './layouts/contact/contact.component';
 import { LoginComponent } from './layouts/login/login.component';
 import { RegisterComponent } from './layouts/register/register.component';
 import { FavouriteComponent } from './layouts/favourite/favourite.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -32,13 +34,17 @@ import { FavouriteComponent } from './layouts/favourite/favourite.component';
     ContactComponent,
     LoginComponent,
     RegisterComponent,
-    FavouriteComponent
+    FavouriteComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      maxOpened: 2
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
