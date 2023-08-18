@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
   logOut() {
     this.checkLogin = false;
     sessionStorage.removeItem('login');
-    this.notificationSrv.showWarning('', 'Logged out!');
+    location.assign('/login')
   }
 
   goToFavourite() {

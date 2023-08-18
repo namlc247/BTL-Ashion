@@ -11,24 +11,28 @@ export class NotificationService {
   showSuccess(message: string, title: string) {
     this.toastr.success(message, title, {
       timeOut: 1000,
+      positionClass: 'toast-top-right'
     })
   }
 
   showError(message: string, title: string) {
     this.toastr.error(message, title, {
       timeOut: 1000,
+      positionClass: 'toast-top-right'
     })
   }
 
   showInfo(message: string, title: string) {
     this.toastr.info(message, title, {
       timeOut: 1500,
+      positionClass: 'toast-top-right'
     })
   }
 
   showWarning(message: string, title: string) {
     this.toastr.warning(message, title, {
       timeOut: 1000,
+      positionClass: 'toast-top-right'
     })
   }
 

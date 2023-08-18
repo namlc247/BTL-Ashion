@@ -3731,3 +3731,12 @@ ol {
 .product__hover li:nth-child(3) {
   transition: all 0.2s ease 0.2s;
 }
+
+.header {
+  box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.25);
+  background-color: #fffffff3;
+}
+
+.toast-top-right {
+  top: 90px !important;
+}
