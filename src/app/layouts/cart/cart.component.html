@@ -57,11 +57,11 @@
                 </td>
                 <td class="cart__total">$ {{item.final_price * item.quantity}}</td>
                 <td class="cart__close">
+
                   <swal #deleteSwal title="Are you sure?" text="This cannot be undone" icon="warning"
                     [showCancelButton]="true" confirmButtonColor="#33cc33" cancelButtonColor="#ca1515"
-                    confirmButtonText="Yes, delete it!" [focusConfirm]="false" (confirm)="removeCart(idx)">
+                    confirmButtonText="Yes, delete it!" [focusConfirm]="true" (confirm)="removeCart(idx)">
                   </swal>
-
 
                   <span class="icon_close" (click)="deleteSwal.fire()"></span>
                 </td>
