@@ -93,8 +93,9 @@ export class ShopComponent implements OnInit {
 
   reloadShop() {
     this.sortType = 'Sort By';
+    this.urlData = {}
 
-    this.getProductData();
+    this.getProductData(this.urlData);
   }
 
   addFavourite(prd_id: any) {
