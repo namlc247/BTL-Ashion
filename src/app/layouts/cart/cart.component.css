@@ -24,8 +24,13 @@
   transition: 0.3s all;
 }
 
+.update__btn span {
+  transition: 0.3s all;
+}
+
 .update__btn a:hover span {
   color: #fff;
+  transition: 0.3s all;
 }
 
 input[type="number"]::-webkit-inner-spin-button,

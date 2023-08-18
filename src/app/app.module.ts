@@ -19,6 +19,8 @@ import { RegisterComponent } from './layouts/register/register.component';
 import { FavouriteComponent } from './layouts/favourite/favourite.component';
 import { ToastrModule } from 'ngx-toastr';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { BlogComponent } from './layouts/blog/blog.component';
+import { BlogDetailComponent } from './layouts/blog-detail/blog-detail.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     LoginComponent,
     RegisterComponent,
     FavouriteComponent,
+    BlogComponent,
+    BlogDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,8 @@ import { ContactComponent } from './layouts/contact/contact.component';
 import { LoginComponent } from './layouts/login/login.component';
 import { RegisterComponent } from './layouts/register/register.component';
 import { FavouriteComponent } from './layouts/favourite/favourite.component';
+import { BlogComponent } from './layouts/blog/blog.component';
+import { BlogDetailComponent } from './layouts/blog-detail/blog-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +22,8 @@ const routes: Routes = [
   { path: 'product-detail/:id', component: ProductDetailComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'blog', component: BlogComponent },
+  { path: 'blog-detail', component: BlogDetailComponent },
 ];
 
 @NgModule({
