@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NotificationService } from './notification.service';
 
 const api = 'http://localhost:3000/api';
 
@@ -10,7 +11,8 @@ const api = 'http://localhost:3000/api';
 export class FavouriteService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private notificationSrv: NotificationService
   ) { }
 
   getFavouriteProduct(acc_id: any) {
@@ -22,10 +24,14 @@ export class FavouriteService {
   }
 
   addFavourite(data: any) {
+    this.notificationSrv.showSuccess('Add to Favourite', 'Success!');
+
     return this.http.post(`${api}/add-favourite`, data);
   }
 
   removeFavourite(data: any) {
+    this.notificationSrv.showError('', 'Removed!');
+
     return this.http.delete(`${api}/remove-favourite`, {
       body: data
     });

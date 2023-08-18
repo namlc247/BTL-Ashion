@@ -55,4 +55,13 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/favourite', this.account.name]);
     }
   }
+
+  goToCart() {
+    if (!this.checkLogin) {
+      this.notificationSrv.showWarning('', 'You have to Log In!');
+      return;
+    } else {
+      this.router.navigate(['/cart']);
+    }
+  }
 }

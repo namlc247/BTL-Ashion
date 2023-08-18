@@ -47,7 +47,7 @@
             <!-- <li><a href="#">Women’s</a></li>
             <li><a href="#">Men’s</a></li> -->
             <li><a routerLink="/shop">Shop</a></li>
-            <li><a routerLink="/cart">Cart</a></li>
+            <li><a (click)="goToCart()" style="cursor: pointer;">Cart</a></li>
             <li><a routerLink="/checkout">Checkout</a></li>
             <!-- <li><a href="./blog.html">Blog</a></li> -->
             <li><a routerLink="/contact">Contact</a></li>
@@ -76,7 +76,7 @@
               </a>
             </li>
             <li>
-              <a routerLink="/cart">
+              <a (click)="goToCart()" style="cursor: pointer;">
                 <span class="icon_bag_alt"></span>
                 <!-- <div class="tip" style="background-color: #ca1515;">2</div> -->
               </a>

@@ -18,7 +18,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h6 class="coupon__link"><span class="icon_tag_alt"></span> <a href="#">Have a coupon?</a> Click
+        <h6 class="coupon__link"><span class="icon_tag_alt"></span> <a routerLink="/cart">Have a coupon?</a> Click
           here to enter your code.</h6>
       </div>
     </div>
@@ -111,19 +111,19 @@
                   <span class="top__text">Product</span>
                   <span class="top__text__right">Total</span>
                 </li>
-                <li>01. Chain buck bag <span>$ 300.0</span></li>
-                <li>02. Zip-pockets pebbled<br /> tote briefcase <span>$ 170.0</span></li>
-                <li>03. Black jean <span>$ 170.0</span></li>
-                <li>04. Cotton shirt <span>$ 110.0</span></li>
+                <li *ngFor="let item of cart; let idx = index">
+                  {{idx}}. {{item.name}} ({{item.quantity}}) <span>$ {{item.final_price * item.quantity}}</span>
+                </li>
               </ul>
             </div>
             <div class="checkout__order__total">
               <ul>
-                <li>Subtotal <span>$ 750.0</span></li>
-                <li>Total <span>$ 750.0</span></li>
+                <li>Subtotal <span>$ {{subtotal}}</span></li>
+                <li>Shipping <span>$ 10</span></li>
+                <li>Total <span>$ {{subtotal + 10}}</span></li>
               </ul>
             </div>
-            <div class="checkout__order__widget">
+            <!-- <div class="checkout__order__widget">
               <label for="o-acc">
                 Create an acount?
                 <input type="checkbox" id="o-acc">
@@ -141,8 +141,8 @@
                 <input type="checkbox" id="paypal">
                 <span class="checkmark"></span>
               </label>
-            </div>
-            <button type="submit" class="site-btn">Place oder</button>
+            </div> -->
+            <button type="button" class="site-btn">Place oder</button>
           </div>
         </div>
       </div>

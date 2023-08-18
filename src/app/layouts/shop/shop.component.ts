@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AccountService } from 'src/app/service/account.service';
+import { CartService } from 'src/app/service/cart.service';
 import { CategoryService } from 'src/app/service/category.service';
 import { FavouriteService } from 'src/app/service/favourite.service';
 import { NotificationService } from 'src/app/service/notification.service';
@@ -27,11 +28,23 @@ export class ShopComponent implements OnInit {
 
   constructor(
     private prdService: ProductService,
-    private catService: CategoryService,
+    private categoryService: CategoryService,
     private accServive: AccountService,
     private favouriteService: FavouriteService,
+    private cartService: CartService,
     private notificationSrv: NotificationService
   ) { }
+
+  ngOnInit(): void {
+    this.account = this.accServive.getAccountInStorage();
+    this.checkLogin = this.account ? true : false;
+
+    this.categoryService.getCategories().subscribe((res: any) => {
+      this.categories = res.result;
+    })
+
+    this.getProductData();
+  }
 
   getProductData(data: any = {}) {
     this.prdService.getProduct(data).subscribe((res: any) => {
@@ -51,17 +64,6 @@ export class ShopComponent implements OnInit {
       }
 
     });
-  }
-
-  ngOnInit(): void {
-    this.account = this.accServive.getAccountInStorage();
-    this.checkLogin = this.account ? true : false;
-
-    this.catService.getCategories().subscribe((res: any) => {
-      this.categories = res.result;
-    })
-
-    this.getProductData();
   }
 
   filterPrdByCat(cat_id: number) {
@@ -108,8 +110,6 @@ export class ShopComponent implements OnInit {
       this.favouriteService.addFavourite(data).subscribe((res: any) => {
         this.getProductData(this.urlData);
       });
-
-      this.notificationSrv.showSuccess('Add to Favourite', 'Success!');
     }
   }
 
@@ -122,7 +122,13 @@ export class ShopComponent implements OnInit {
     this.favouriteService.removeFavourite(data).subscribe((res: any) => {
       this.getProductData(this.urlData);
     });
+  }
 
-    this.notificationSrv.showError('', 'Removed!');
+  addCart(prd: any) {
+    if (!this.checkLogin) {
+      this.notificationSrv.showWarning('', 'You have to Log In!');
+    } else {
+      this.cartService.saveCartData(prd, this.account.id);
+    }
   }
 }

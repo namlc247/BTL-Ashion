@@ -1,0 +1,38 @@
+.cart__total__procced .primary-btn:hover {
+  color: #fff;
+}
+
+.cart__btn a,
+.update__btn a {
+  transition: 0.3s all;
+  border-radius: 50px;
+}
+
+.cart__close span {
+  transition: 0.3s all;
+  transform: rotate(0deg);
+}
+
+.cart__close span:hover {
+  transform: rotate(360deg);
+}
+
+.cart__btn a:hover,
+.cart__close span:hover {
+  background-color: #ca1515;
+  color: #fff;
+  transition: 0.3s all;
+}
+
+.update__btn a:hover span {
+  color: #fff;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+input[type="number"] {
+  font-size: 16px;
+}

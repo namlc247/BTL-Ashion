@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/service/account.service';
+import { CartService } from 'src/app/service/cart.service';
 import { FavouriteService } from 'src/app/service/favourite.service';
 import { NotificationService } from 'src/app/service/notification.service';
 import { ProductService } from 'src/app/service/product.service';
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
     private prdService: ProductService,
     private favouriteService: FavouriteService,
     private accServive: AccountService,
+    private cartService: CartService,
     private notificationSrv: NotificationService
   ) { }
 
@@ -75,8 +77,6 @@ export class HomeComponent implements OnInit {
 
       this.favouriteService.addFavourite(data).subscribe();
       this.getProductData(this.urlData);
-
-      this.notificationSrv.showSuccess('Add to Favourite', 'Success!');
     }
   }
 
@@ -88,7 +88,13 @@ export class HomeComponent implements OnInit {
 
     this.favouriteService.removeFavourite(data).subscribe();
     this.getProductData(this.urlData);
+  }
 
-    this.notificationSrv.showError('', 'Removed!');
+  addCart(prd: any) {
+    if (!this.checkLogin) {
+      this.notificationSrv.showWarning('', 'You have to Log In!');
+    } else {
+      this.cartService.saveCartData(prd, this.account.id);
+    }
   }
 }
