@@ -112,7 +112,7 @@
                   <span class="top__text__right">Total</span>
                 </li>
                 <li *ngFor="let item of cart; let idx = index">
-                  {{idx}}. {{item.name}} ({{item.quantity}}) <span>$ {{item.final_price * item.quantity}}</span>
+                  {{idx + 1}}. {{item.name}} ({{item.quantity}}) <span>$ {{item.final_price * item.quantity}}</span>
                 </li>
               </ul>
             </div>
