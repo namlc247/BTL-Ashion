@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/service/account.service';
 import { CartService } from 'src/app/service/cart.service';
+import { DataService } from 'src/app/service/data.service';
 import { FavouriteService } from 'src/app/service/favourite.service';
 import { NotificationService } from 'src/app/service/notification.service';
 
@@ -14,6 +15,7 @@ export class FavouriteComponent implements OnInit {
   account: any = {};
 
   constructor(
+    private dataService: DataService,
     private favouriteService: FavouriteService,
     private accServive: AccountService,
     private cartService: CartService
@@ -41,6 +43,12 @@ export class FavouriteComponent implements OnInit {
 
     this.favouriteService.removeFavourite(data).subscribe((res: any) => {
       this.getFavouriteData(this.account.id);
+
+      this.favouriteService.getTotalFavourite(this.account.id).subscribe((res: any) => {
+        this.dataService.saveChange({
+          favouriteQtt: res.result
+        })
+      })
     });
   }
 

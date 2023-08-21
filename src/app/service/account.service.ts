@@ -16,7 +16,7 @@ export class AccountService implements OnInit {
 
   getAccountInStorage(): any {
     let jsonData = sessionStorage.getItem('login');
-    return jsonData ? JSON.parse(jsonData) : {};
+    return jsonData ? JSON.parse(jsonData) : null;
   }
 
   checkLogin(data: any) {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/service/account.service';
 import { DataService } from 'src/app/service/data.service';
+import { FavouriteService } from 'src/app/service/favourite.service';
 import { NotificationService } from 'src/app/service/notification.service';
 
 declare var $: any;
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit {
   checkLogin: boolean = false;
   account: any = {};
   totalCart: number = 0;
+  totalFavourite: number = 0;
 
   constructor(
     private router: Router,
@@ -30,8 +32,10 @@ export class HeaderComponent implements OnInit {
 
     this.dataService.data.subscribe((res: any) => {
       this.totalCart = res.cartQtt;
-      console.log(res.account);
+      this.totalFavourite = res.favouriteQtt;
     })
+
+    console.log(this.dataService.data);
 
     $(".canvas__open").on('click', function () {
       $(".offcanvas-menu-wrapper").addClass("active");

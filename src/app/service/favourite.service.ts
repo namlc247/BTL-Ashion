@@ -19,6 +19,10 @@ export class FavouriteService {
     return this.http.get(`${api}/favourite/${acc_id}`);
   }
 
+  getTotalFavourite(acc_id: any) {
+    return this.http.get(`${api}/total-favourite/${acc_id}`);
+  }
+
   checkFavourite(data: any) {
     return this.http.get(`${api}/check-favourite/${data.account_id}/${data.product_id}`);
   }

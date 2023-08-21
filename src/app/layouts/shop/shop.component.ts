@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AccountService } from 'src/app/service/account.service';
 import { CartService } from 'src/app/service/cart.service';
 import { CategoryService } from 'src/app/service/category.service';
+import { DataService } from 'src/app/service/data.service';
 import { FavouriteService } from 'src/app/service/favourite.service';
 import { NotificationService } from 'src/app/service/notification.service';
 import { ProductService } from 'src/app/service/product.service';
@@ -27,6 +28,7 @@ export class ShopComponent implements OnInit {
   })
 
   constructor(
+    private dataService: DataService,
     private prdService: ProductService,
     private categoryService: CategoryService,
     private accServive: AccountService,
@@ -110,6 +112,12 @@ export class ShopComponent implements OnInit {
 
       this.favouriteService.addFavourite(data).subscribe((res: any) => {
         this.getProductData(this.urlData);
+
+        this.favouriteService.getTotalFavourite(this.account.id).subscribe((res: any) => {
+          this.dataService.saveChange({
+            favouriteQtt: res.result
+          })
+        })
       });
     }
   }
@@ -122,6 +130,12 @@ export class ShopComponent implements OnInit {
 
     this.favouriteService.removeFavourite(data).subscribe((res: any) => {
       this.getProductData(this.urlData);
+
+      this.favouriteService.getTotalFavourite(this.account.id).subscribe((res: any) => {
+        this.dataService.saveChange({
+          favouriteQtt: res.result
+        })
+      })
     });
   }
 

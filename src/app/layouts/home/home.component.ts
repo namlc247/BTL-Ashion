@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/service/account.service';
 import { CartService } from 'src/app/service/cart.service';
+import { DataService } from 'src/app/service/data.service';
 import { FavouriteService } from 'src/app/service/favourite.service';
 import { NotificationService } from 'src/app/service/notification.service';
 import { ProductService } from 'src/app/service/product.service';
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   urlData: any = {};
 
   constructor(
+    private dataService: DataService,
     private prdService: ProductService,
     private favouriteService: FavouriteService,
     private accServive: AccountService,
@@ -75,8 +77,16 @@ export class HomeComponent implements OnInit {
         product_id: prd_id
       }
 
-      this.favouriteService.addFavourite(data).subscribe();
-      this.getProductData(this.urlData);
+      this.favouriteService.addFavourite(data).subscribe(() => {
+        this.getProductData(this.urlData);
+
+        this.favouriteService.getTotalFavourite(this.account.id).subscribe((res: any) => {
+          this.dataService.saveChange({
+            favouriteQtt: res.result
+          })
+        })
+      });
+
     }
   }
 
@@ -86,8 +96,15 @@ export class HomeComponent implements OnInit {
       product_id: prd_id
     }
 
-    this.favouriteService.removeFavourite(data).subscribe();
-    this.getProductData(this.urlData);
+    this.favouriteService.removeFavourite(data).subscribe(() => {
+      this.getProductData(this.urlData);
+
+      this.favouriteService.getTotalFavourite(this.account.id).subscribe((res: any) => {
+        this.dataService.saveChange({
+          favouriteQtt: res.result
+        })
+      })
+    });
   }
 
   addCart(prd: any) {

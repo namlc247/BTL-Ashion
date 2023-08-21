@@ -32,7 +32,7 @@
 <!-- Offcanvas Menu End -->
 
 <!-- Header Section Begin -->
-<header class="header">
+<header class="header my-header">
   <div class="container">
     <div class="row">
       <div class="col-xl-3 col-lg-2">
@@ -75,13 +75,17 @@
             <li>
               <a (click)="goToFavourite()">
                 <span class="icon_heart_alt"></span>
-                <!-- <div class="tip" style="background-color: #ca1515;">2</div> -->
+                <div *ngIf="totalFavourite > 0" class="tip" style="background-color: #ca1515;">
+                  {{totalFavourite}}
+                </div>
               </a>
             </li>
             <li>
               <a (click)="goToCart()" style="cursor: pointer;">
                 <span class="icon_bag_alt"></span>
-                <div *ngIf="totalCart > 0" class="tip" style="background-color: #ca1515;">{{totalCart}}</div>
+                <div *ngIf="totalCart > 0" class="tip" style="background-color: #ca1515;">
+                  {{totalCart}}
+                </div>
               </a>
             </li>
 
@@ -96,6 +100,6 @@
 </header>
 <!-- Header Section End -->
 
-<!-- <div style="margin-top: 100px;"></div> -->
+<div style="margin-top: 100px;"></div>
 
 <app-search></app-search>
