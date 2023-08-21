@@ -2,6 +2,9 @@ import { Injectable, OnInit } from '@angular/core';
 import { NotificationService } from './notification.service';
 import { AccountService } from './account.service';
 import { DataService } from './data.service';
+import { HttpClient } from '@angular/common/http';
+
+const api = 'http://localhost:3000/api';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +12,7 @@ import { DataService } from './data.service';
 export class CartService implements OnInit {
 
   constructor(
+    private http: HttpClient,
     private notificationSrv: NotificationService,
   ) { }
 
@@ -28,12 +32,15 @@ export class CartService implements OnInit {
       cart = JSON.parse(cartJson);
     }
     return cart;
+    // return this.http.get(`${api}/favourite/${account_id}`);
   }
 
   checkPrdExits(prd: any, data: any) {
     return data.findIndex((item: any) => {
       return prd.id == item.id;
     })
+
+    // return this.http.get(`${api}/check-cart/${data.account_id}/${data.product_id}`);
   }
 
   getTotalQtt(account_id: any) {
@@ -46,6 +53,10 @@ export class CartService implements OnInit {
     });
 
     return t;
+  }
+
+  getTotalCart(acc_id: any) {
+    return this.http.get(`${api}/total-cart/${acc_id}`);
   }
 
   saveCartData(prd: any, account_id: any) {
@@ -61,6 +72,8 @@ export class CartService implements OnInit {
 
     this.saveJson(cart, account_id);
     this.notificationSrv.showSuccess('Add to Cart', 'Success!');
+
+    // return this.http.post(`${api}/add-cart`, data);
   }
 
   removeFromCart(index: any, account_id: any) {
@@ -70,6 +83,12 @@ export class CartService implements OnInit {
 
     this.saveJson(cart, account_id);
     this.notificationSrv.showError('', 'Removed!');
+
+    // this.notificationSrv.showError('', 'Removed!');
+
+    // return this.http.delete(`${api}/remove-favourite`, {
+    //   body: data
+    // });
   }
 
   updateQuantity(index: any, quantity: number, account_id: any) {
@@ -78,5 +97,7 @@ export class CartService implements OnInit {
     cart[index].quantity = quantity;
 
     this.saveJson(cart, account_id);
+
+    // return this.http.put(`${api}/update-cart`, data);
   }
 }

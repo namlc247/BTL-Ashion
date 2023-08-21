@@ -30,12 +30,11 @@ export class HeaderComponent implements OnInit {
     this.account = this.accServive.getAccountInStorage();
     this.checkLogin = this.account ? true : false;
 
-    this.dataService.data.subscribe((res: any) => {
-      this.totalCart = res.cartQtt;
-      this.totalFavourite = res.favouriteQtt;
-    })
+    // this.dataService.data.subscribe((res: any) => {
+    //   this.totalCart = res.cartQtt;
+    //   this.totalFavourite = res.favouriteQtt;
+    // })
 
-    console.log(this.dataService.data);
 
     $(".canvas__open").on('click', function () {
       $(".offcanvas-menu-wrapper").addClass("active");
