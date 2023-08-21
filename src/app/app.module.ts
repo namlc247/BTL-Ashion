@@ -21,6 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BlogComponent } from './layouts/blog/blog.component';
 import { BlogDetailComponent } from './layouts/blog-detail/blog-detail.component';
+import { DataService } from './service/data.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { BlogDetailComponent } from './layouts/blog-detail/blog-detail.component
     }),
     SweetAlert2Module.forRoot()
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

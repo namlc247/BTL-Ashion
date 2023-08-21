@@ -1,6 +1,11 @@
 .cart__total__procced .primary-btn:hover {
   color: #fff;
 }
+.cart__btn a,
+.cart__close span,
+.cart__total__procced {
+  background-color: #eee;
+}
 
 .cart__btn a,
 .update__btn a {

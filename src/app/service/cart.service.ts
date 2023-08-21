@@ -1,5 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { NotificationService } from './notification.service';
+import { AccountService } from './account.service';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,7 @@ import { NotificationService } from './notification.service';
 export class CartService implements OnInit {
 
   constructor(
-    private notificationSrv: NotificationService
+    private notificationSrv: NotificationService,
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +34,18 @@ export class CartService implements OnInit {
     return data.findIndex((item: any) => {
       return prd.id == item.id;
     })
+  }
+
+  getTotalQtt(account_id: any) {
+    let t = 0;
+
+    let cart = this.getCartData(account_id);
+
+    cart.forEach((item: any) => {
+      t += parseFloat(item.quantity);
+    });
+
+    return t;
   }
 
   saveCartData(prd: any, account_id: any) {

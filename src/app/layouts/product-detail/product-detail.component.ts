@@ -41,6 +41,7 @@ export class ProductDetailComponent implements OnInit {
     if (!this.checkLogin) {
       this.notificationSrv.showWarning('', 'You have to Log In!');
     } else {
+      console.log(prd);
       this.cartService.saveCartData(prd, this.account.id);
     }
   }
