@@ -18,7 +18,8 @@ export class FavouriteComponent implements OnInit {
     private dataService: DataService,
     private favouriteService: FavouriteService,
     private accServive: AccountService,
-    private cartService: CartService
+    private cartService: CartService,
+    private notificationSrv: NotificationService
   ) { }
 
   getFavouriteData(acc_id: any) {
@@ -52,7 +53,28 @@ export class FavouriteComponent implements OnInit {
     });
   }
 
-  addCart(prd: any) {
-    this.cartService.saveCartData(prd, this.account.id);
+  addCart(prd_id: any) {
+
+    this.cartService.checkPrdExits(this.account.id, prd_id).subscribe((res: any) => {
+      let quantity = res.result;
+
+      if (quantity > 0) {
+        let data = {
+          quantity: quantity + 1,
+          account_id: this.account.id,
+          product_id: prd_id
+        }
+        this.cartService.updateQuantity(data).subscribe();
+      } else {
+        let data = {
+          account_id: this.account.id,
+          product_id: prd_id
+        }
+        this.cartService.addCart(data).subscribe();
+      }
+
+      this.notificationSrv.showSuccess('', 'Added to Cart!');
+    });
+
   }
 }

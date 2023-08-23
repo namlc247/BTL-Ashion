@@ -12,7 +12,7 @@ declare var $: any;
 export class CartComponent implements OnInit {
   checkLogin: boolean = false;
   account: any = {};
-  cart: any = {}
+  cart: any = [];
   subtotal: number = 0;
 
   constructor(
@@ -25,7 +25,7 @@ export class CartComponent implements OnInit {
     this.account = this.accServive.getAccountInStorage();
     this.checkLogin = this.account ? true : false;
 
-    this.cart = this.cartService.getCartData(this.account.id);
+    this.getCart(this.account.id);
 
     this.subtotal = 0;
     for (const item of this.cart) {
@@ -33,23 +33,33 @@ export class CartComponent implements OnInit {
     }
   }
 
-  removeCart(index: any) {
-    this.cartService.removeFromCart(index, this.account.id);
-    this.cart = this.cartService.getCartData(this.account.id);
+  getCart(account_id: number) {
+    this.cartService.getCartData(account_id).subscribe((res: any) => {
+      this.cart = res.result;
+    })
   }
 
-  updateQuantity(e: any, index: any) {
-    this.cartService.updateQuantity(index, e.target.value, this.account.id);
+  removeCart(prd_id: any) {
+    let data = {
+      account_id: this.account.id,
+      product_id: prd_id
+    }
+
+    this.cartService.removeFromCart(data).subscribe();
+    this.getCart(this.account.id);
+  }
+
+  changeQuantity(e: any, product_id: any) {
+    let data = {
+      quantity: e.target.value,
+      product_id: product_id,
+      account_id: this.account.id
+    }
+    this.cartService.updateQuantity(data).subscribe();
   }
 
   updateCart() {
-    this.cart = this.cartService.getCartData(this.account.id);
-
-    this.subtotal = 0;
-    for (const item of this.cart) {
-      this.subtotal += item.final_price * item.quantity;
-    }
-
-    this.notificationSrv.showSuccess('', 'Update Success!');
+    this.notificationSrv.showSuccess('', 'Updated!');
+    this.getCart(this.account.id)
   }
 }

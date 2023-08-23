@@ -107,11 +107,30 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addCart(prd: any) {
+  addCart(prd_id: any) {
     if (!this.checkLogin) {
       this.notificationSrv.showWarning('', 'You have to Log In!');
     } else {
-      this.cartService.saveCartData(prd, this.account.id);
+      this.cartService.checkPrdExits(this.account.id, prd_id).subscribe((res: any) => {
+        let quantity = res.result;
+
+        if (quantity > 0) {
+          let data = {
+            quantity: quantity + 1,
+            account_id: this.account.id,
+            product_id: prd_id
+          }
+          this.cartService.updateQuantity(data).subscribe();
+        } else {
+          let data = {
+            account_id: this.account.id,
+            product_id: prd_id
+          }
+          this.cartService.addCart(data).subscribe();
+        }
+
+        this.notificationSrv.showSuccess('', 'Added to Cart!');
+      });
     }
   }
 }

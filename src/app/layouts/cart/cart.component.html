@@ -52,7 +52,7 @@
                 <td class="cart__quantity">
                   <div class="pro-qty">
                     <input type="number" [value]="item.quantity" min="1" max="99"
-                      (change)="updateQuantity($event, idx)">
+                      (change)="changeQuantity($event, item.id)">
                   </div>
                 </td>
                 <td class="cart__total">$ {{item.final_price * item.quantity}}</td>
@@ -60,11 +60,11 @@
 
                   <swal #deleteSwal title="Are you sure?" text="This cannot be undone" icon="warning"
                     [showCancelButton]="true" confirmButtonColor="#33cc33" cancelButtonColor="#ca1515"
-                    confirmButtonText="Yes, delete it!" [focusConfirm]="true" (confirm)="removeCart(idx)">
+                    confirmButtonText="Yes, delete it!" [focusConfirm]="true" (confirm)="removeCart(item.id)">
                   </swal>
 
                   <span class="icon_close" (click)="deleteSwal.fire()"></span>
-                  <!-- <span class="icon_close" (click)="removeCart(idx)"></span> -->
+                  <!-- <span class="icon_close" (click)="removeCart(item.id)"></span> -->
                 </td>
               </tr>
             </tbody>

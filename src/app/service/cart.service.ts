@@ -20,84 +20,31 @@ export class CartService implements OnInit {
 
   }
 
-  private saveJson(cart: any, account_id: any) {
-    let cartJson = JSON.stringify(cart);
-    sessionStorage.setItem(`cart${account_id}`, cartJson);
-  }
-
   getCartData(account_id: any) {
-    let cartJson: any = sessionStorage.getItem(`cart${account_id}`);
-    let cart: any = []
-    if (cartJson) {
-      cart = JSON.parse(cartJson);
-    }
-    return cart;
-    // return this.http.get(`${api}/favourite/${account_id}`);
+    return this.http.get(`${api}/cart/${account_id}`);
   }
 
-  checkPrdExits(prd: any, data: any) {
-    return data.findIndex((item: any) => {
-      return prd.id == item.id;
-    })
-
-    // return this.http.get(`${api}/check-cart/${data.account_id}/${data.product_id}`);
+  checkPrdExits(account_id: any, prd_id: any) {
+    return this.http.get(`${api}/check-cart/${account_id}/${prd_id}`);
   }
 
-  getTotalQtt(account_id: any) {
-    let t = 0;
+  // getTotalCart(acc_id: any) {
+  //   return this.http.get(`${api}/total-cart/${acc_id}`);
+  // }
 
-    let cart = this.getCartData(account_id);
-
-    cart.forEach((item: any) => {
-      t += parseFloat(item.quantity);
-    });
-
-    return t;
+  addCart(data: any) {
+    return this.http.post(`${api}/add-cart`, data);
   }
 
-  getTotalCart(acc_id: any) {
-    return this.http.get(`${api}/total-cart/${acc_id}`);
-  }
-
-  saveCartData(prd: any, account_id: any) {
-    let cart = this.getCartData(account_id);
-    let index = this.checkPrdExits(prd, cart);
-
-    if (index == -1) {
-      prd.quantity = 1;
-      cart.push(prd);
-    } else {
-      cart[index].quantity = parseFloat(cart[index].quantity) + 1;
-    }
-
-    this.saveJson(cart, account_id);
-    this.notificationSrv.showSuccess('Add to Cart', 'Success!');
-
-    // return this.http.post(`${api}/add-cart`, data);
-  }
-
-  removeFromCart(index: any, account_id: any) {
-    let cart = this.getCartData(account_id);
-
-    cart.splice(index, 1);
-
-    this.saveJson(cart, account_id);
+  removeFromCart(data: any) {
     this.notificationSrv.showError('', 'Removed!');
 
-    // this.notificationSrv.showError('', 'Removed!');
-
-    // return this.http.delete(`${api}/remove-favourite`, {
-    //   body: data
-    // });
+    return this.http.delete(`${api}/remove-cart`, {
+      body: data
+    });
   }
 
-  updateQuantity(index: any, quantity: number, account_id: any) {
-    let cart = this.getCartData(account_id);
-
-    cart[index].quantity = quantity;
-
-    this.saveJson(cart, account_id);
-
-    // return this.http.put(`${api}/update-cart`, data);
+  updateQuantity(data: any) {
+    return this.http.put(`${api}/update-cart`, data);
   }
 }
