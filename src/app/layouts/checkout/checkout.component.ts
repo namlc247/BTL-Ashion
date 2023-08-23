@@ -19,12 +19,14 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.account = this.accServive.getAccountInStorage();
-    this.cart = this.cartService.getCartData(this.account.id);
 
-    this.subtotal = 0;
-    for (const item of this.cart) {
-      this.subtotal += item.final_price * item.quantity;
-    }
+    this.cartService.getCartData(this.account.id).subscribe((res: any) => {
+      this.cart = res.result;
+    })
+
+    this.cartService.getTotalPrice(this.account.id).subscribe((res: any) => {
+      this.subtotal = res.result;
+    })
   }
 
 }

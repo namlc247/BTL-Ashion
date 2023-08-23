@@ -27,10 +27,10 @@ export class CartComponent implements OnInit {
 
     this.getCart(this.account.id);
 
-    this.subtotal = 0;
-    for (const item of this.cart) {
-      this.subtotal += item.final_price * item.quantity;
-    }
+    this.cartService.getTotalPrice(this.account.id).subscribe((res: any) => {
+      this.subtotal = res.result;
+    })
+
   }
 
   getCart(account_id: number) {
@@ -60,6 +60,9 @@ export class CartComponent implements OnInit {
 
   updateCart() {
     this.notificationSrv.showSuccess('', 'Updated!');
-    this.getCart(this.account.id)
+    this.getCart(this.account.id);
+    this.cartService.getTotalPrice(this.account.id).subscribe((res: any) => {
+      this.subtotal = res.result;
+    })
   }
 }

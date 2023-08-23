@@ -32,6 +32,10 @@ export class CartService implements OnInit {
   //   return this.http.get(`${api}/total-cart/${acc_id}`);
   // }
 
+  getTotalPrice(acc_id: any) {
+    return this.http.get(`${api}/total-price/${acc_id}`);
+  }
+
   addCart(data: any) {
     return this.http.post(`${api}/add-cart`, data);
   }
