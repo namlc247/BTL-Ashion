@@ -14,6 +14,7 @@ export class CartService implements OnInit {
   constructor(
     private http: HttpClient,
     private notificationSrv: NotificationService,
+    private dataService: DataService
   ) { }
 
   ngOnInit(): void {
@@ -28,9 +29,15 @@ export class CartService implements OnInit {
     return this.http.get(`${api}/check-cart/${account_id}/${prd_id}`);
   }
 
-  // getTotalCart(acc_id: any) {
-  //   return this.http.get(`${api}/total-cart/${acc_id}`);
-  // }
+  private getTotalCart(acc_id: any) {
+    return this.http.get(`${api}/total-cart/${acc_id}`);
+  }
+
+  dataToTalcart(acc_id: any) {
+    this.getTotalCart(acc_id).subscribe((res: any) => {
+      this.dataService.saveCartChange({ cartQtt: res.result });
+    })
+  }
 
   getTotalPrice(acc_id: any) {
     return this.http.get(`${api}/total-price/${acc_id}`);

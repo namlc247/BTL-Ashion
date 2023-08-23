@@ -45,16 +45,11 @@ export class FavouriteComponent implements OnInit {
     this.favouriteService.removeFavourite(data).subscribe((res: any) => {
       this.getFavouriteData(this.account.id);
 
-      this.favouriteService.getTotalFavourite(this.account.id).subscribe((res: any) => {
-        this.dataService.saveChange({
-          favouriteQtt: res.result
-        })
-      })
+      this.favouriteService.dataToTalFavourite(this.account.id);
     });
   }
 
   addCart(prd_id: any) {
-
     this.cartService.checkPrdExits(this.account.id, prd_id).subscribe((res: any) => {
       let quantity = res.result;
 
@@ -64,16 +59,20 @@ export class FavouriteComponent implements OnInit {
           account_id: this.account.id,
           product_id: prd_id
         }
-        this.cartService.updateQuantity(data).subscribe();
+        this.cartService.updateQuantity(data).subscribe(() => {
+          this.cartService.dataToTalcart(this.account.id);
+        });
       } else {
         let data = {
           account_id: this.account.id,
           product_id: prd_id
         }
-        this.cartService.addCart(data).subscribe();
+        this.cartService.addCart(data).subscribe(() => {
+          this.cartService.dataToTalcart(this.account.id);
+        });
       }
 
-      this.notificationSrv.showSuccess('', 'Added to Cart!');
+      this.notificationSrv.showSuccess('', 'Added to Cart!')
     });
 
   }

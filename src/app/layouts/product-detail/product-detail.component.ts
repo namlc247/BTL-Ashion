@@ -50,16 +50,20 @@ export class ProductDetailComponent implements OnInit {
             account_id: this.account.id,
             product_id: prd_id
           }
-          this.cartService.updateQuantity(data).subscribe();
+          this.cartService.updateQuantity(data).subscribe(() => {
+            this.cartService.dataToTalcart(this.account.id);
+          });
         } else {
           let data = {
             account_id: this.account.id,
             product_id: prd_id
           }
-          this.cartService.addCart(data).subscribe();
+          this.cartService.addCart(data).subscribe(() => {
+            this.cartService.dataToTalcart(this.account.id);
+          });
         }
 
-        this.notificationSrv.showSuccess('', 'Added to Cart!');
+        this.notificationSrv.showSuccess('', 'Added to Cart!')
       });
     }
   }

@@ -45,7 +45,9 @@ export class CartComponent implements OnInit {
       product_id: prd_id
     }
 
-    this.cartService.removeFromCart(data).subscribe();
+    this.cartService.removeFromCart(data).subscribe(() => {
+      this.cartService.dataToTalcart(this.account.id);
+    });
     this.getCart(this.account.id);
   }
 
@@ -55,7 +57,9 @@ export class CartComponent implements OnInit {
       product_id: product_id,
       account_id: this.account.id
     }
-    this.cartService.updateQuantity(data).subscribe();
+    this.cartService.updateQuantity(data).subscribe(() => {
+      this.cartService.dataToTalcart(this.account.id);
+    });
   }
 
   updateCart() {

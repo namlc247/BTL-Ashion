@@ -113,11 +113,7 @@ export class ShopComponent implements OnInit {
       this.favouriteService.addFavourite(data).subscribe((res: any) => {
         this.getProductData(this.urlData);
 
-        this.favouriteService.getTotalFavourite(this.account.id).subscribe((res: any) => {
-          this.dataService.saveChange({
-            favouriteQtt: res.result
-          })
-        })
+        this.favouriteService.dataToTalFavourite(this.account.id);
       });
     }
   }
@@ -130,12 +126,7 @@ export class ShopComponent implements OnInit {
 
     this.favouriteService.removeFavourite(data).subscribe((res: any) => {
       this.getProductData(this.urlData);
-
-      this.favouriteService.getTotalFavourite(this.account.id).subscribe((res: any) => {
-        this.dataService.saveChange({
-          favouriteQtt: res.result
-        })
-      })
+      this.favouriteService.dataToTalFavourite(this.account.id);
     });
   }
 
@@ -152,16 +143,20 @@ export class ShopComponent implements OnInit {
             account_id: this.account.id,
             product_id: prd_id
           }
-          this.cartService.updateQuantity(data).subscribe();
+          this.cartService.updateQuantity(data).subscribe(() => {
+            this.cartService.dataToTalcart(this.account.id);
+          });
         } else {
           let data = {
             account_id: this.account.id,
             product_id: prd_id
           }
-          this.cartService.addCart(data).subscribe();
+          this.cartService.addCart(data).subscribe(() => {
+            this.cartService.dataToTalcart(this.account.id);
+          });
         }
 
-        this.notificationSrv.showSuccess('', 'Added to Cart!');
+        this.notificationSrv.showSuccess('', 'Added to Cart!')
       });
     }
   }
