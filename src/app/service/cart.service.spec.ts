@@ -12,5 +12,6 @@ describe('CartService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+    console.log('ok');
   });
 });
